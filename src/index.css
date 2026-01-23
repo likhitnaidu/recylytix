@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 120 20% 98%;
+    --foreground: 150 30% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 30% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 30% 10%;
+
+    --primary: 142 76% 26%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 140 40% 94%;
+    --secondary-foreground: 142 60% 25%;
+
+    --muted: 140 20% 96%;
+    --muted-foreground: 150 10% 45%;
+
+    --accent: 152 60% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 142 70% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 140 20% 88%;
+    --input: 140 20% 88%;
+    --ring: 142 76% 36%;
+
+    --radius: 0.75rem;
+
+    /* Custom eco tokens */
+    --eco-gradient: linear-gradient(135deg, hsl(142 76% 26%) 0%, hsl(152 60% 45%) 100%);
+    --eco-gradient-light: linear-gradient(135deg, hsl(140 40% 94%) 0%, hsl(152 40% 90%) 100%);
+    --eco-shadow: 0 4px 20px -4px hsl(142 76% 26% / 0.2);
+    --eco-shadow-lg: 0 10px 40px -10px hsl(142 76% 26% / 0.3);
+    --eco-glow: 0 0 20px hsl(142 76% 36% / 0.3);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 150 30% 10%;
+    --sidebar-primary: 142 76% 26%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 140 40% 94%;
+    --sidebar-accent-foreground: 142 60% 25%;
+    --sidebar-border: 140 20% 90%;
+    --sidebar-ring: 142 76% 36%;
+  }
+
+  .dark {
+    --background: 150 30% 6%;
+    --foreground: 140 20% 96%;
+
+    --card: 150 25% 10%;
+    --card-foreground: 140 20% 96%;
+
+    --popover: 150 25% 10%;
+    --popover-foreground: 140 20% 96%;
+
+    --primary: 142 70% 45%;
+    --primary-foreground: 150 30% 6%;
+
+    --secondary: 150 20% 15%;
+    --secondary-foreground: 140 20% 90%;
+
+    --muted: 150 20% 15%;
+    --muted-foreground: 140 10% 60%;
+
+    --accent: 152 50% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 142 60% 50%;
+    --success-foreground: 150 30% 6%;
+
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 20% 18%;
+    --input: 150 20% 18%;
+    --ring: 142 70% 45%;
+
+    --eco-gradient: linear-gradient(135deg, hsl(142 70% 35%) 0%, hsl(152 50% 40%) 100%);
+    --eco-gradient-light: linear-gradient(135deg, hsl(150 20% 12%) 0%, hsl(152 20% 15%) 100%);
+    --eco-shadow: 0 4px 20px -4px hsl(0 0% 0% / 0.4);
+    --eco-shadow-lg: 0 10px 40px -10px hsl(0 0% 0% / 0.5);
+
+    --sidebar-background: 150 25% 8%;
+    --sidebar-foreground: 140 20% 96%;
+    --sidebar-primary: 142 70% 45%;
+    --sidebar-primary-foreground: 150 30% 6%;
+    --sidebar-accent: 150 20% 15%;
+    --sidebar-accent-foreground: 140 20% 90%;
+    --sidebar-border: 150 20% 15%;
+    --sidebar-ring: 142 70% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .eco-card {
+    @apply bg-card rounded-xl border border-border shadow-sm;
+    box-shadow: var(--eco-shadow);
+  }
+
+  .eco-card-hover {
+    @apply eco-card transition-all duration-300;
+  }
+
+  .eco-card-hover:hover {
+    box-shadow: var(--eco-shadow-lg);
+    @apply -translate-y-0.5;
+  }
+
+  .eco-button-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium text-primary-foreground transition-all duration-200;
+    background: var(--eco-gradient);
+  }
+
+  .eco-button-primary:hover {
+    box-shadow: var(--eco-glow);
+    @apply scale-[1.02];
+  }
+
+  .eco-button-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium bg-secondary text-secondary-foreground border border-border transition-all duration-200;
+  }
+
+  .eco-button-secondary:hover {
+    @apply bg-secondary/80;
+  }
+
+  .eco-badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground;
+  }
+
+  .eco-gradient-bg {
+    background: var(--eco-gradient-light);
+  }
+
+  .eco-gradient-text {
+    background: var(--eco-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  font-family: 'Inter', sans-serif;
+  @apply rounded-xl;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply rounded-xl shadow-lg border border-border;
+  box-shadow: var(--eco-shadow-lg);
+}
+
+.leaflet-popup-content {
+  @apply m-0 p-0;
+}
+
+.leaflet-popup-tip {
+  @apply bg-card;
+}
+
+.custom-marker {
+  @apply flex items-center justify-center;
+}
+
+.user-marker {
+  @apply w-4 h-4 rounded-full bg-blue-500 border-2 border-white;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.center-marker {
+  @apply w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm;
+  background: var(--eco-gradient);
+  box-shadow: var(--eco-shadow);
+}
+
+/* Route line animation */
+.route-line {
+  stroke-dasharray: 10, 10;
+  animation: dash 1s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/50;
+}
