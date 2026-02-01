@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
+import { useEffect, useRef } from "react";
 import { MapPin, Recycle, Leaf, ArrowRight, CheckCircle,} from "lucide-react";
 import { Button } from "@/components/ui/button";
 const FloatingLeaves = () => {
@@ -32,45 +33,44 @@ const FloatingLeaves = () => {
     </div>
   );
 };
+const TreeAnimation = ({ side = "left" }) => {
+  const svgRef = useRef(null);
 
-const AnimatedTree = () => (
-  <svg
-    viewBox="0 0 300 400"
-    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] md:w-[360px] opacity-70 tree-grow z-10"
-  >
-    {/* Trunk */}
-    <path
-      d="M150 400 C145 320 145 260 150 200 C155 260 155 320 150 400"
-      className="tree-trunk"
-      fill="none"
-      stroke="#14532d"
-      strokeWidth="12"
-      strokeLinecap="round"
-    />
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
 
-    {/* Branches */}
-    <path d="M150 260 C110 230 90 210 70 190" className="tree-branch" />
-    <path d="M150 250 C190 220 215 205 235 185" className="tree-branch" />
-    <path d="M150 220 C115 190 100 175 85 160" className="tree-branch" />
-    <path d="M150 210 C190 180 210 165 225 150" className="tree-branch" />
+    const paths = svg.querySelectorAll(".draw");
+    paths.forEach((p, i) => {
+      const length = p.getTotalLength();
+      p.style.strokeDasharray = length;
+      p.style.strokeDashoffset = length;
+      p.style.animation = `drawPath 2s ease-out forwards ${i * 0.4}s`;
+    });
+  }, []);
 
-    {/* Leaves */}
-    {[
-      [70,190],[90,170],[110,200],
-      [230,180],[210,160],[195,200],
-      [100,150],[200,140]
-    ].map(([x,y],i)=>(
-      <ellipse
-        key={i}
-        cx={x}
-        cy={y}
-        rx="10"
-        ry="6"
-        className="tree-leaf"
+  return (
+    <svg
+      ref={svgRef}
+      viewBox="0 0 300 400"
+      className={`absolute bottom-0 hidden md:block w-[220px] md:w-[280px] opacity-50 pointer-events-none
+        ${side === "left" ? "left-6" : "right-6 scale-x-[-1]"}`}
+    >
+      <path
+        className="draw"
+        d="M150 380 C145 300 145 240 150 180 C155 240 155 300 150 380"
+        stroke="#14532d"
+        strokeWidth="10"
+        fill="none"
       />
-    ))}
-  </svg>
-);
+      <path className="draw" d="M150 260 C120 230 90 210 70 190" stroke="#166534" strokeWidth="6" fill="none" />
+      <path className="draw" d="M150 250 C190 220 215 205 235 185" stroke="#166534" strokeWidth="6" fill="none" />
+      <path className="draw" d="M150 220 C130 195 115 180 100 165" stroke="#166534" strokeWidth="6" fill="none" />
+    </svg>
+  );
+};
+
+
 
 
 const Home = () => {
@@ -114,52 +114,10 @@ const Home = () => {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
-.tree-grow {
-  transform-origin: bottom center;
-  animation: treeScale 2s ease-out forwards;
-}
-
-.tree-trunk {
-  stroke-dasharray: 400;
-  stroke-dashoffset: 400;
-  animation: drawTrunk 2s ease forwards;
-}
-
-.tree-branch {
-  fill: none;
-  stroke: #166534;
-  stroke-width: 6;
-  stroke-linecap: round;
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
-  animation: drawBranch 1.5s ease forwards;
-  animation-delay: 1.2s;
-}
-
-.tree-leaf {
-  fill: #16a34a;
-  opacity: 0;
-  transform-origin: center;
-  animation: leafPop 0.6s ease forwards;
-  animation-delay: 2.4s;
-}
-
-@keyframes drawTrunk {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes drawBranch {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes leafPop {
-  from { opacity:0; transform:scale(0); }
-  to { opacity:1; transform:scale(1); }
-}
-
-@keyframes treeScale {
-  from { transform:translateX(-50%) scale(0.7); }
-  to { transform:translateX(-50%) scale(1); }
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 
@@ -184,8 +142,8 @@ const Home = () => {
 
       {/* main  */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
-        <AnimatedTree />
-
+        <TreeAnimation side="left" />
+<TreeAnimation side="right" />
 <div className="relative z-30 max-w-4xl mx-auto text-center">
 
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
