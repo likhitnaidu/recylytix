@@ -74,25 +74,24 @@ const TreeAnimation = ({ side = "left" }) => {
   [100,170,16],[120,160,14],[180,155,14],[200,165,16],
   [140,180,18],[160,170,16],[150,150,14],[165,190,18]
 ].map(([x,y,s],i)=>(
-  <g
-    key={i}
-    className="tree-leaf"
-    style={{ animationDelay: `${2 + i * 0.15}s` }}
-    transform={`translate(${x} ${y})`}
-  >
-    {/* Leaf body */}
-    <path
-      d={`M0 0 C ${s/2} -${s} ${s} -${s/2} 0 ${s} C -${s} -${s/2} -${s/2} -${s} 0 0`}
-      fill="#16a34a"
-    />
-    {/* Vein */}
-    <path
-      d={`M0 0 L 0 ${s}`}
-      stroke="#22c55e"
-      strokeWidth="1"
-    />
+  <g key={i} transform={`translate(${x} ${y})`}>
+    <g
+      className="tree-leaf"
+      style={{ animationDelay: `${2 + i * 0.15}s` }}
+    >
+      <path
+        d={`M0 0 C ${s/2} -${s} ${s} -${s/2} 0 ${s} C -${s} -${s/2} -${s/2} -${s} 0 0`}
+        fill="#16a34a"
+      />
+      <path
+        d={`M0 0 L 0 ${s}`}
+        stroke="#22c55e"
+        strokeWidth="1"
+      />
+    </g>
   </g>
 ))}
+
 
 
     </svg>
