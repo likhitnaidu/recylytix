@@ -53,7 +53,7 @@ const TreeAnimation = ({ side = "left" }) => {
     <svg
       ref={svgRef}
       viewBox="0 0 300 520"
-      className={`absolute bottom-0 hidden md:block w-[300px] md:w-[380px] opacity-50 pointer-events-none
+      className={`absolute bottom-0 hidden md:block w-[300px] md:w-[380px] opacity-50 pointer-events-none tree-wind
         ${side === "left" ? "left-6" : "right-6 scale-x-[-1]"}`}
     >
       <path
@@ -81,6 +81,7 @@ const TreeAnimation = ({ side = "left" }) => {
     rx="12"
     ry="7"
     className="tree-leaf"
+    style={{ animationDelay: `${2 + i * 0.15}s` }}
   />
 ))}
 
@@ -149,11 +150,28 @@ const Home = () => {
   opacity: 0;
   transform-origin: center;
   animation: leafPop 0.6s ease forwards;
-  animation-delay: 2.4s;
 }
 @keyframes leafPop {
   from { opacity: 0; transform: scale(0); }
   to { opacity: 1; transform: scale(1); }
+}
+
+.tree-wind {
+  transform-origin: bottom center;
+  animation: wind 6s ease-in-out infinite;
+}
+
+@keyframes wind {
+  0%,100% { transform: rotate(0deg); }
+  50% { transform: rotate(1.5deg); }
+}
+.tree-branch {
+  animation: branchMove 4s ease-in-out infinite alternate;
+}
+
+@keyframes branchMove {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(1deg); }
 }
 
 
