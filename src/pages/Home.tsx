@@ -3,18 +3,20 @@ import { MapPin, Recycle, Leaf, ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 const FloatingLeaves = () => (
   <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-    {[...Array(8)].map((_, i) => (
+    {[...Array(25)].map((_, i) => (
       <Leaf
         key={i}
-        className="absolute text-green-400/30 animate-leaf"
+        className="absolute text-green-400/40 animate-leaf"
         style={{
-          left: `${(i * 12) % 100}%`,
-          animationDelay: `${i * 2}s`
+          left: `${(i * 7) % 100}%`,
+          animationDelay: `${i * 0.8}s`,
+          fontSize: `${14 + (i % 4) * 6}px`
         }}
       />
     ))}
   </div>
 );
+
 
 const Home = () => {
   const features = [
