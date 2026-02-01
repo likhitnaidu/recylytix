@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useMemo } from "react";
 import { MapPin, Recycle, Leaf, ArrowRight, CheckCircle,} from "lucide-react";
 import { Button } from "@/components/ui/button";
 const FloatingLeaves = () => {
@@ -33,6 +32,44 @@ const FloatingLeaves = () => {
   );
 };
 
+const AnimatedTree = () => (
+  <svg
+    viewBox="0 0 300 400"
+    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] md:w-[360px] opacity-70 tree-grow z-10"
+  >
+    {/* Trunk */}
+    <path
+      d="M150 400 C145 320 145 260 150 200 C155 260 155 320 150 400"
+      className="tree-trunk"
+      fill="none"
+      stroke="#14532d"
+      strokeWidth="12"
+      strokeLinecap="round"
+    />
+
+    {/* Branches */}
+    <path d="M150 260 C110 230 90 210 70 190" className="tree-branch" />
+    <path d="M150 250 C190 220 215 205 235 185" className="tree-branch" />
+    <path d="M150 220 C115 190 100 175 85 160" className="tree-branch" />
+    <path d="M150 210 C190 180 210 165 225 150" className="tree-branch" />
+
+    {/* Leaves */}
+    {[
+      [70,190],[90,170],[110,200],
+      [230,180],[210,160],[195,200],
+      [100,150],[200,140]
+    ].map(([x,y],i)=>(
+      <ellipse
+        key={i}
+        cx={x}
+        cy={y}
+        rx="10"
+        ry="6"
+        className="tree-leaf"
+      />
+    ))}
+  </svg>
+);
 
 
 const Home = () => {
@@ -76,6 +113,54 @@ const Home = () => {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+.tree-grow {
+  transform-origin: bottom center;
+  animation: treeScale 2s ease-out forwards;
+}
+
+.tree-trunk {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: drawTrunk 2s ease forwards;
+}
+
+.tree-branch {
+  fill: none;
+  stroke: #166534;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawBranch 1.5s ease forwards;
+  animation-delay: 1.2s;
+}
+
+.tree-leaf {
+  fill: #16a34a;
+  opacity: 0;
+  transform-origin: center;
+  animation: leafPop 0.6s ease forwards;
+  animation-delay: 2.4s;
+}
+
+@keyframes drawTrunk {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawBranch {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes leafPop {
+  from { opacity:0; transform:scale(0); }
+  to { opacity:1; transform:scale(1); }
+}
+
+@keyframes treeScale {
+  from { transform:translateX(-50%) scale(0.7); }
+  to { transform:translateX(-50%) scale(1); }
+}
+
 
 `}</style>
 
@@ -98,17 +183,7 @@ const Home = () => {
 
       {/* main  */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
-{/* Left Tree */}
-<div className="hidden md:flex absolute left-10 bottom-0 flex-col items-center opacity-60 float select-none z-20">
-  <div className="w-5 h-40 bg-green-900/50 rounded-full -mb-6" />
-  <div className="text-[150px] leading-none">🌳</div>
-</div>
-
-{/* Right Tree */}
-<div className="hidden md:flex absolute right-10 bottom-0 flex-col items-center opacity-60 float select-none z-20">
-  <div className="w-5 h-40 bg-green-900/50 rounded-full -mb-6" />
-  <div className="text-[150px] leading-none">🌳</div>
-</div>
+        <AnimatedTree />
 
 <div className="relative z-30 max-w-4xl mx-auto text-center">
 
@@ -157,16 +232,6 @@ const Home = () => {
             ))}
           </div>
         </div>
-<div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-t from-green-800/50 to-transparent z-10" />
-
-<div className="absolute bottom-0 left-0 w-full h-12 z-10 opacity-60"
-     style={{
-       backgroundImage:
-         "repeating-linear-gradient(90deg,#14532d 0px,#14532d 6px,transparent 6px,transparent 12px)"
-     }}
-/>
-
-
       </section>
 
       {/* Materials We Cover */}
