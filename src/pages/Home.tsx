@@ -1,6 +1,20 @@
 import { Link } from "react-router-dom";
 import { MapPin, Recycle, Leaf, ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+const FloatingLeaves = () => (
+  <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
+    {[...Array(8)].map((_, i) => (
+      <Leaf
+        key={i}
+        className="absolute text-green-400/30 animate-leaf"
+        style={{
+          left: `${(i * 12) % 100}%`,
+          animationDelay: `${i * 2}s`
+        }}
+      />
+    ))}
+  </div>
+);
 
 const Home = () => {
   const features = [
@@ -24,7 +38,27 @@ const Home = () => {
   const materials = ["Plastic", "Paper", "Glass", "Metal", "E-waste"];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen bg-background overflow-hidden">
+      <style>{`
+@keyframes leaf {
+  0% { transform: translateY(100vh); opacity:0 }
+  10% { opacity:1 }
+  100% { transform: translateY(-120vh); opacity:0 }
+}
+.animate-leaf {
+  animation: leaf 18s linear infinite;
+}
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0) }
+  50% { transform: translateY(-8px) }
+}
+`}</style>
+
+<FloatingLeaves />
+
       {/* Header */}
       <header className="bg-primary text-primary-foreground py-4 px-6 shadow-md">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -41,7 +75,7 @@ const Home = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
+      <section className="min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
             <Leaf className="w-4 h-4" />
@@ -64,7 +98,7 @@ const Home = () => {
       </section>
 
       {/* Features */}
-      <section className="py-16 px-6 bg-muted/30">
+      <section className="min-h-screen flex items-center py-16 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-2xl font-bold text-center text-foreground mb-12">
             How RecyLyTix Helps You
@@ -73,7 +107,7 @@ const Home = () => {
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+               className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow float"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <feature.icon className="w-6 h-6 text-primary" />
@@ -92,6 +126,8 @@ const Home = () => {
 
       {/* Materials We Cover */}
       <section className="py-16 px-6">
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-green-300/20 rounded-full blur-3xl"/>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-300/20 rounded-full blur-3xl"/>
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-2xl font-bold text-foreground mb-8">
             Materials We Cover
@@ -114,7 +150,7 @@ const Home = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-6 bg-primary text-primary-foreground">
+  <section className="min-h-screen flex items-center py-16 px-6 bg-primary text-primary-foreground">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl font-bold mb-4">
             Ready to Start Recycling Right?
@@ -123,7 +159,7 @@ const Home = () => {
             Open the map to find recycling centers near you and get started today.
           </p>
           <Link to="/map">
-            <Button size="lg" variant="secondary" className="gap-2">
+            <Button size="lg" variant="secondary" className="gap-2 animate-pulse">
               <MapPin className="w-5 h-5" />
               Open Recycling Map
             </Button>
