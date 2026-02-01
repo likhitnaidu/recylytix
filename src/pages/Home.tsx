@@ -15,8 +15,8 @@ const FloatingLeaves = () => {
     []
   );
 
-  return (
-    <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
+  return (<div className="pointer-events-none fixed inset-0 overflow-hidden z-0 opacity-70">
+
       {leaves.map((leaf) => (
         <Leaf
           key={leaf.id}
@@ -98,17 +98,20 @@ const Home = () => {
 
       {/* main  */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
-<div className="hidden md:flex absolute left-6 bottom-24 flex-col items-center opacity-50 float select-none">
-  <div className="w-6 h-32 bg-green-900/40 rounded-full mb-[-20px]" />
-  <div className="text-[140px]">🌳</div>
+{/* Left Tree */}
+<div className="hidden md:flex absolute left-10 bottom-0 flex-col items-center opacity-60 float select-none z-20">
+  <div className="w-5 h-40 bg-green-900/50 rounded-full -mb-6" />
+  <div className="text-[150px] leading-none">🌳</div>
 </div>
 
-<div className="hidden md:flex absolute right-6 bottom-24 flex-col items-center opacity-50 float select-none">
-  <div className="w-6 h-32 bg-green-900/40 rounded-full mb-[-20px]" />
-  <div className="text-[140px]">🌳</div>
+{/* Right Tree */}
+<div className="hidden md:flex absolute right-10 bottom-0 flex-col items-center opacity-60 float select-none z-20">
+  <div className="w-5 h-40 bg-green-900/50 rounded-full -mb-6" />
+  <div className="text-[150px] leading-none">🌳</div>
 </div>
 
-        <div className="max-w-4xl mx-auto text-center">
+<div className="relative z-30 max-w-4xl mx-auto text-center">
+
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
             <Leaf className="w-4 h-4" />
             <span className="text-sm font-medium">Recycling Made Easy</span>
@@ -154,9 +157,15 @@ const Home = () => {
             ))}
           </div>
         </div>
-<div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-green-700/40 to-transparent" />
+<div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-t from-green-800/50 to-transparent z-10" />
 
-<div className="absolute bottom-0 left-0 w-full h-10 bg-[repeating-linear-gradient(90deg,#166534_0px,#166534_6px,transparent_6px,transparent_12px)] opacity-40" />
+<div className="absolute bottom-0 left-0 w-full h-12 z-10 opacity-60"
+     style={{
+       backgroundImage:
+         "repeating-linear-gradient(90deg,#14532d 0px,#14532d 6px,transparent 6px,transparent 12px)"
+     }}
+/>
+
 
       </section>
 
