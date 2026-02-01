@@ -142,8 +142,19 @@ const Home = () => {
 
       {/* main  */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
-        <TreeAnimation side="left" />
-<TreeAnimation side="right" />
+     
+<iframe
+  title="tree-left"
+  src="https://codepen.io/osublake/full/gpGEye"
+  className="hidden md:block absolute left-0 bottom-0 w-[320px] h-[420px] border-0 pointer-events-none opacity-70"
+/>
+
+<iframe
+  title="tree-right"
+  src="https://codepen.io/osublake/full/gpGEye"
+  className="hidden md:block absolute right-0 bottom-0 w-[320px] h-[420px] border-0 pointer-events-none opacity-70 scale-x-[-1]"
+/>
+
 <div className="relative z-20 max-w-4xl mx-auto text-center">
 
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
