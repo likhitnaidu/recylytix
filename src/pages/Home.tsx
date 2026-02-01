@@ -151,6 +151,11 @@ const Home = () => {
   animation: leafPop 0.6s ease forwards;
   animation-delay: 2.4s;
 }
+@keyframes leafPop {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 
 
 
