@@ -52,20 +52,38 @@ const TreeAnimation = ({ side = "left" }) => {
   return (
     <svg
       ref={svgRef}
-      viewBox="0 0 300 400"
-      className={`absolute bottom-0 hidden md:block w-[220px] md:w-[280px] opacity-50 pointer-events-none
+      viewBox="0 0 300 520"
+      className={`absolute bottom-0 hidden md:block w-[300px] md:w-[380px] opacity-50 pointer-events-none
         ${side === "left" ? "left-6" : "right-6 scale-x-[-1]"}`}
     >
       <path
         className="draw"
-        d="M150 380 C145 300 145 240 150 180 C155 240 155 300 150 380"
+        d="M150 520 C145 400 145 300 150 200 C155 300 155 400 150 520"
         stroke="#14532d"
         strokeWidth="10"
         fill="none"
       />
-      <path className="draw" d="M150 260 C120 230 90 210 70 190" stroke="#166534" strokeWidth="6" fill="none" />
-      <path className="draw" d="M150 250 C190 220 215 205 235 185" stroke="#166534" strokeWidth="6" fill="none" />
-      <path className="draw" d="M150 220 C130 195 115 180 100 165" stroke="#166534" strokeWidth="6" fill="none" />
+<path className="draw tree-branch" d="M150 300 C110 260 90 235 70 210" />
+<path className="draw tree-branch" d="M150 290 C190 250 215 230 235 210" />
+<path className="draw tree-branch" d="M150 250 C115 215 100 200 85 180" />
+<path className="draw tree-branch" d="M150 235 C190 200 210 185 225 170" />
+
+{[
+  [70,210],[90,190],[110,220],[130,200],
+  [230,200],[210,180],[195,220],[175,200],
+  [100,170],[120,160],[180,155],[200,165],
+  [140,180],[160,170],[150,150],[165,190]
+].map(([x,y],i)=>(
+  <ellipse
+    key={i}
+    cx={x}
+    cy={y}
+    rx="12"
+    ry="7"
+    className="tree-leaf"
+  />
+))}
+
     </svg>
   );
 };
@@ -119,6 +137,21 @@ const Home = () => {
     stroke-dashoffset: 0;
   }
 }
+.tree-branch {
+  fill: none;
+  stroke: #166534;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.tree-leaf {
+  fill: #16a34a;
+  opacity: 0;
+  transform-origin: center;
+  animation: leafPop 0.6s ease forwards;
+  animation-delay: 2.4s;
+}
+
 
 
 `}</style>
@@ -143,17 +176,8 @@ const Home = () => {
       {/* main  */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
      
-<iframe
-  title="tree-left"
-  src="https://codepen.io/osublake/full/gpGEye"
-  className="hidden md:block absolute left-0 bottom-0 w-[320px] h-[420px] border-0 pointer-events-none opacity-70"
-/>
-
-<iframe
-  title="tree-right"
-  src="https://codepen.io/osublake/full/gpGEye"
-  className="hidden md:block absolute right-0 bottom-0 w-[320px] h-[420px] border-0 pointer-events-none opacity-70 scale-x-[-1]"
-/>
+<TreeAnimation side="left" />
+  <TreeAnimation side="right" />
 
 <div className="relative z-20 max-w-4xl mx-auto text-center">
 
