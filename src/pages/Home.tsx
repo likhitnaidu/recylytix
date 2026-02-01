@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
-import { MapPin, Recycle, Leaf, ArrowRight, CheckCircle } from "lucide-react";
+import { MapPin, Recycle, Leaf, ArrowRight, CheckCircle, TreePine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 const FloatingLeaves = () => {
   const leaves = useMemo(
@@ -96,8 +96,11 @@ const Home = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
+      {/* main  */}
+      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
+       <TreePine className="hidden md:block absolute left-8 bottom-12 w-40 h-40 text-green-700/40 float" />
+       <TreePine className="hidden md:block absolute right-8 bottom-12 w-40 h-40 text-green-700/40 float" />
+
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
             <Leaf className="w-4 h-4" />
