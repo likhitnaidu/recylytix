@@ -144,7 +144,7 @@ const Home = () => {
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
         <TreeAnimation side="left" />
 <TreeAnimation side="right" />
-<div className="relative z-30 max-w-4xl mx-auto text-center">
+<div className="relative z-20 max-w-4xl mx-auto text-center">
 
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
             <Leaf className="w-4 h-4" />
