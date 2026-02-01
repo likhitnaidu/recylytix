@@ -238,7 +238,7 @@ const Home = () => {
       </section>
 
       {/* Features */}
-      <section className="min-h-screen flex items-center py-16 px-6 bg-muted/30">
+      <section className="py-16 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-2xl font-bold text-center text-foreground mb-12">
             How RecyLyTix Helps You
@@ -290,7 +290,7 @@ const Home = () => {
       </section>
 
       {/* CTA */}
-  <section className="min-h-screen flex items-center py-16 px-6 bg-primary text-primary-foreground">
+  <section className="py-16 px-6 bg-primary text-primary-foreground">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl font-bold mb-4">
             Ready to Start Recycling Right?
