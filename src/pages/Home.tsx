@@ -98,12 +98,16 @@ const Home = () => {
 
       {/* main  */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary/10 via-background to-accent/20 py-20 px-6">
-       <div className="hidden md:block absolute left-6 bottom-10 text-[140px] opacity-40 float select-none">
-           🌳
-        </div>
-      <div className="hidden md:block absolute right-6 bottom-10 text-[140px] opacity-40 float select-none">
-           🌳
-        </div>
+<div className="hidden md:flex absolute left-6 bottom-24 flex-col items-center opacity-50 float select-none">
+  <div className="w-6 h-32 bg-green-900/40 rounded-full mb-[-20px]" />
+  <div className="text-[140px]">🌳</div>
+</div>
+
+<div className="hidden md:flex absolute right-6 bottom-24 flex-col items-center opacity-50 float select-none">
+  <div className="w-6 h-32 bg-green-900/40 rounded-full mb-[-20px]" />
+  <div className="text-[140px]">🌳</div>
+</div>
+
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
             <Leaf className="w-4 h-4" />
@@ -150,6 +154,10 @@ const Home = () => {
             ))}
           </div>
         </div>
+<div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-green-700/40 to-transparent" />
+
+<div className="absolute bottom-0 left-0 w-full h-10 bg-[repeating-linear-gradient(90deg,#166534_0px,#166534_6px,transparent_6px,transparent_12px)] opacity-40" />
+
       </section>
 
       {/* Materials We Cover */}
