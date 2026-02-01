@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 import { MapPin, Recycle, Leaf, ArrowRight, CheckCircle,} from "lucide-react";
 import { Button } from "@/components/ui/button";
 const FloatingLeaves = () => {
