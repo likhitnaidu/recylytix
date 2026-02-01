@@ -1,21 +1,38 @@
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 import { MapPin, Recycle, Leaf, ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-const FloatingLeaves = () => (
-  <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-    {[...Array(25)].map((_, i) => (
-      <Leaf
-        key={i}
-        className="absolute text-green-400/40 animate-leaf"
-        style={{
-          left: `${(i * 7) % 100}%`,
-          animationDelay: `${i * 0.8}s`,
-          fontSize: `${14 + (i % 4) * 6}px`
-        }}
-      />
-    ))}
-  </div>
-);
+const FloatingLeaves = () => {
+  const leaves = useMemo(
+    () =>
+      Array.from({ length: 50 }).map((_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        size: 12 + Math.random() * 20,
+        delay: Math.random() * 10,
+        duration: 10 + Math.random() * 10
+      })),
+    []
+  );
+
+  return (
+    <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
+      {leaves.map((leaf) => (
+        <Leaf
+          key={leaf.id}
+          className="absolute text-green-400/30 animate-leaf"
+          style={{
+            left: `${leaf.left}%`,
+            fontSize: `${leaf.size}px`,
+            animationDelay: `${leaf.delay}s`,
+            animationDuration: `${leaf.duration}s`
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 
 
 const Home = () => {
@@ -43,20 +60,23 @@ const Home = () => {
     <div className="relative min-h-screen bg-background overflow-hidden">
       <style>{`
 @keyframes leaf {
-  0% { transform: translateY(100vh); opacity:0 }
-  10% { opacity:1 }
-  100% { transform: translateY(-120vh); opacity:0 }
+  0% {
+    transform: translateY(110vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
 }
+
 .animate-leaf {
-  animation: leaf 18s linear infinite;
+  animation-name: leaf;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
-.float {
-  animation: float 6s ease-in-out infinite;
-}
-@keyframes float {
-  0%,100% { transform: translateY(0) }
-  50% { transform: translateY(-8px) }
-}
+
 `}</style>
 
 <FloatingLeaves />
