@@ -8,7 +8,7 @@ const FloatingLeaves = () => {
       Array.from({ length: 50 }).map((_, i) => ({
         id: i,
         left: Math.random() * 100,
-        size: 12 + Math.random() * 20,
+        size: 20 + Math.random() * 30,
         delay: Math.random() * 10,
         duration: 10 + Math.random() * 10
       })),
@@ -20,7 +20,7 @@ const FloatingLeaves = () => {
       {leaves.map((leaf) => (
         <Leaf
           key={leaf.id}
-          className="absolute text-green-400/30 animate-leaf"
+          className="absolute text-green-700/40 animate-leaf"
           style={{
             left: `${leaf.left}%`,
             fontSize: `${leaf.size}px`,
