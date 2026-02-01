@@ -69,21 +69,31 @@ const TreeAnimation = ({ side = "left" }) => {
 <path className="draw tree-branch" d="M150 235 C190 200 210 185 225 170" />
 
 {[
-  [70,210],[90,190],[110,220],[130,200],
-  [230,200],[210,180],[195,220],[175,200],
-  [100,170],[120,160],[180,155],[200,165],
-  [140,180],[160,170],[150,150],[165,190]
-].map(([x,y],i)=>(
-  <ellipse
+  [70,210,20],[90,190,25],[110,220,22],[130,200,18],
+  [230,200,24],[210,180,20],[195,220,22],[175,200,18],
+  [100,170,16],[120,160,14],[180,155,14],[200,165,16],
+  [140,180,18],[160,170,16],[150,150,14],[165,190,18]
+].map(([x,y,s],i)=>(
+  <g
     key={i}
-    cx={x}
-    cy={y}
-    rx="12"
-    ry="7"
     className="tree-leaf"
     style={{ animationDelay: `${2 + i * 0.15}s` }}
-  />
+    transform={`translate(${x} ${y})`}
+  >
+    {/* Leaf body */}
+    <path
+      d={`M0 0 C ${s/2} -${s} ${s} -${s/2} 0 ${s} C -${s} -${s/2} -${s/2} -${s} 0 0`}
+      fill="#16a34a"
+    />
+    {/* Vein */}
+    <path
+      d={`M0 0 L 0 ${s}`}
+      stroke="#22c55e"
+      strokeWidth="1"
+    />
+  </g>
 ))}
+
 
     </svg>
   );
@@ -146,11 +156,15 @@ const Home = () => {
 }
 
 .tree-leaf {
-  fill: #16a34a;
   opacity: 0;
   transform-origin: center;
-  animation: leafPop 0.6s ease forwards;
+  animation: leafPop 0.6s ease forwards, leafSway 3s ease-in-out infinite;
 }
+@keyframes leafSway {
+  0%,100% { transform: rotate(0deg); }
+  50% { transform: rotate(6deg); }
+}
+
 @keyframes leafPop {
   from { opacity: 0; transform: scale(0); }
   to { opacity: 1; transform: scale(1); }
