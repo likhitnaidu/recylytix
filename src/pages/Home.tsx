@@ -20,7 +20,7 @@ const FloatingLeaves = () => {
       {leaves.map((leaf) => (
         <Leaf
           key={leaf.id}
-          className="absolute text-green-700/40 animate-leaf"
+          className="absolute text-green-900/80 animate-leaf"
           style={{
             left: `${leaf.left}%`,
             fontSize: `${leaf.size}px`,
